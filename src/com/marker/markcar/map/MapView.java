@@ -50,7 +50,6 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
     private GestureController mGestureController;
     private Matrix mMatrix;
     private float[] mMatrixValues = new float[9];
-
     private Map mMap;
 
     private static class ThreadHandler extends Handler {
@@ -170,8 +169,29 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
         }
 
         mMatrix.getValues(mMatrixValues);
-        mMatrix.preTranslate(dx / mMatrixValues[Matrix.MSCALE_X], dy / mMatrixValues[Matrix.MSCALE_Y]);
 
+        float dxs = dx / mMatrixValues[Matrix.MSCALE_X];
+        float dys = dy / mMatrixValues[Matrix.MSCALE_Y];
+
+        float x = mMatrixValues[Matrix.MTRANS_X];
+        float y = mMatrixValues[Matrix.MTRANS_Y];
+        float s = mMatrixValues[Matrix.MSCALE_X];
+
+        float maxX = getWidth() - mMap.getWidth() * s;
+        float maxY = getHeight() - mMap.getHeight() * s;
+
+        if (dxs + x > 0) {
+            dxs = -x;
+        } else if (dxs + x < maxX) {
+            dxs = maxX - x;
+        }
+        if (dys + y > 0) {
+            dys = -y;
+        } else if (dys + y < maxY) {
+            dys = maxY - y;
+        }
+
+        mMatrix.preTranslate(dxs, dys);
         Canvas canvas = mHolder.lockCanvas();
         canvas.setMatrix(mMatrix);
         drawMap(canvas);
@@ -201,85 +221,8 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
     }
 
     private void drawMap(Canvas canvas) {
-
         clearCanvas(canvas);
         mMap.draw(canvas);
-
-        // Paint p = new Paint();
-        // p.setStrokeWidth(0);
-        // p.setColor(Color.RED);
-        // p.setStyle(Style.STROKE);
-        //
-        // Rect r = new Rect(100, 100, 200, 200);
-        // canvas.drawRect(r, p);
-        // canvas.save();
-        // // canvas.translate(-100, -100);
-        // canvas.scale(4, 4, 100, 100);
-        // // canvas.translate(100, 100);
-        // // canvas.scale(2, 2);
-        // // canvas.translate(-100, -100);
-        //
-        // canvas.drawRect(r, p);
-        // canvas.restore();
-        //
-        // canvas.save();
-        // canvas.scale(0.5f, 0.5f, 500, 500);
-        // canvas.scale(4, 4, 100, 100);
-        // // canvas.translate(200, 200);
-        // p.setColor(Color.BLUE);
-        // canvas.drawRect(r, p);
-        // canvas.restore();
-        //
-        // // canvas.scale(0.5f, 0.5f, 200, 200);
-        // canvas.scale(2f, 2f, -100, -100);
-        // // canvas.translate(200, 200);
-        // p.setColor(Color.GRAY);
-        // canvas.drawRect(r, p);
-
-        // canvas.drawLine(0, 0, 800, 800, p);
-        //
-        // // AngleRect ar = new AngleRect(100, 100, 500, 300, 0);
-        // // ar.draw(canvas, p);
-        // // ar = new AngleRect(100, 100, 100, 200, 30);
-        // // p.setColor(Color.GREEN);
-        // // ar.draw(canvas, p);
-        //
-        // Rect r = new Rect(300, 300, 400, 400);
-        // canvas.rotate(30, 300, 300);
-        // canvas.drawRect(r, p);
-        // canvas.rotate(-30, 300, 300);
-        //
-        // r = new Rect(600, 600, 700, 700);
-        // p.setColor(Color.BLUE);
-        // canvas.drawRect(r, p);
-        //
-        // r = new Rect(0, 0, 10, 10);
-        // p.setColor(Color.GREEN);
-        // // canvas.drawRect(r, p);
-        //
-        // canvas.drawLine(100, 0, 100, 1000, p);
-        // // canvas.translate(100, 0);
-        //
-        // r = new Rect(0, 0, 100, 100);
-        // canvas.drawRect(r, p);
-        //
-        // r = new Rect(100, 100, 200, 200);
-        // canvas.translate(100, 0);
-        // canvas.scale(2, 2, 0, 0);
-        // canvas.translate(-100, 0);
-        // canvas.drawRect(r, p);
-
-        // Path path = new Path();
-        // path.moveTo(0, 0);
-        // path.lineTo(100, 100);
-        //
-        // path.lineTo(30, 70);
-        // path.close();
-        // canvas.drawRect(300, 0, 400, 100, p);
-        //
-        // // p.setColor(Color.BLACK);
-        // canvas.drawPath(path, p);
-        // canvas.scale(1, 1);
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {

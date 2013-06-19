@@ -37,6 +37,7 @@ public class GestureController extends SimpleOnGestureListener implements OnScal
                 mMultiPoint = true;
                 break;
             case MotionEvent.ACTION_POINTER_UP:
+                // less than 2 points
                 if (event.getPointerCount() < 3) {
                     mMultiPoint = false;
                 }

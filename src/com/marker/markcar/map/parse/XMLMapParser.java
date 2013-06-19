@@ -16,11 +16,17 @@ import android.content.Context;
 import com.marker.markcar.map.item.Map;
 import com.marker.markcar.map.item.MapItem;
 import com.marker.markcar.map.item.ParkingSpace;
+import com.marker.markcar.map.item.Wall;
 
 public class XMLMapParser implements MapParser {
+    private static final String POINTS_SEPARATOR = " ";
+    private static final String POINT_XY_SEPARATOR = ",";
+
     private static final String ELEMENT_MAP = "map";
     private static final String ELEMENT_PARK_GROUP = "park-group";
     private static final String ELEMENT_PARK = "park";
+    private static final String ELEMENT_WALL_GROUP = "wall-group";
+    private static final String ELEMENT_WALL = "wall";
 
     private static final String ATTR_ID = "id";
     private static final String ATTR_NAME = "name";
@@ -29,6 +35,7 @@ public class XMLMapParser implements MapParser {
     private static final String ATTR_X = "x";
     private static final String ATTR_Y = "y";
     private static final String ATTR_DEGREE = "degree";
+    private static final String ATTR_POINTS = "points";
 
     private Context mContext;
     private String mPath;
@@ -74,6 +81,29 @@ public class XMLMapParser implements MapParser {
                 }
                 mItem = new ParkingSpace(Float.parseFloat(attributes.getValue(ATTR_X)), Float.parseFloat(attributes
                         .getValue(ATTR_Y)), Integer.parseInt(degree), attributes.getValue(ATTR_NAME));
+                mItemList.add(mItem);
+            } else if (ELEMENT_WALL.equals(localName)) {
+                String degree = attributes.getValue(ATTR_DEGREE);
+                if (degree == null) {
+                    degree = "0";
+                }
+                String[] p = attributes.getValue(ATTR_POINTS).split(POINTS_SEPARATOR);
+                String[] temp;
+                float[] points = new float[p.length * 4];
+                for (int i = 1; i < p.length; i++) {
+                    temp = p[i].split(POINT_XY_SEPARATOR);
+                    points[i * 4 - 2] = Float.parseFloat(temp[0]);
+                    points[i * 4 - 1] = Float.parseFloat(temp[1]);
+                    points[i * 4] = Float.parseFloat(temp[0]);
+                    points[i * 4 + 1] = Float.parseFloat(temp[1]);
+                }
+                temp = p[0].split(POINT_XY_SEPARATOR);
+                points[0] = Float.parseFloat(temp[0]);
+                points[1] = Float.parseFloat(temp[1]);
+                points[points.length - 1] = Float.parseFloat(temp[1]);
+                points[points.length - 2] = Float.parseFloat(temp[0]);
+
+                mItem = new Wall(points, Integer.parseInt(degree));
                 mItemList.add(mItem);
             }
         }
