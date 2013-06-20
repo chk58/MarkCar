@@ -179,8 +179,12 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
         boolean needRedraw = false;
         boolean cancelSelect = false;
         Selectable temp = null;
+        mMatrix.getValues(mMatrixValues);
+        float sx = (x - mMatrixValues[Matrix.MTRANS_X]) / mMatrixValues[Matrix.MSCALE_X];
+        float sy = (y - mMatrixValues[Matrix.MTRANS_Y]) / mMatrixValues[Matrix.MSCALE_Y];
+
         for (Selectable item : mMap.getSelectableList()) {
-            if (item.contains(x, y)) {
+            if (item.contains(sx, sy)) {
                 if (item.isSelected()) {
                     cancelSelect = true;
                 }

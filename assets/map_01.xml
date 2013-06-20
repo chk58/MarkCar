@@ -45,5 +45,8 @@
         <park id="A030" name="A030" x="5400" y="100" />
         <park id="A031" name="A031" x="5600" y="100" />
         <park id="A032" name="A032" x="5800" y="100" />
+
+        <park id="A033" name="A033" x="2000" y="2000" degree="30" />
+        <park id="A034" name="A034" x="2500" y="2500" degree="60" />
     </park-group>
 </map>
