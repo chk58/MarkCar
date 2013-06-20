@@ -7,11 +7,14 @@ import android.graphics.Canvas;
 public class Map {
 
     private final ArrayList<MapItem> mItemList;
+    private final ArrayList<Selectable> mSelectableList;
+
     private final float mWidth;
     private final float mHeight;
 
-    public Map(ArrayList<MapItem> itemList, float width, float height) {
+    public Map(ArrayList<MapItem> itemList, ArrayList<Selectable> selectableList, float width, float height) {
         mItemList = itemList;
+        mSelectableList = selectableList;
         mWidth = width;
         mHeight = height;
     }
@@ -28,5 +31,9 @@ public class Map {
         for (MapItem item : mItemList) {
             item.draw(canvas);
         }
+    }
+
+    public ArrayList<Selectable> getSelectableList() {
+        return mSelectableList;
     }
 }

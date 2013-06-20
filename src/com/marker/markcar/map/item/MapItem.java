@@ -9,7 +9,7 @@ import android.graphics.RectF;
 public abstract class MapItem {
     public static final Paint DEFAULT_PAINT = new Paint();
     static {
-        DEFAULT_PAINT.setStrokeWidth(0);
+        DEFAULT_PAINT.setStrokeWidth(10);
         DEFAULT_PAINT.setColor(Color.BLACK);
         DEFAULT_PAINT.setStyle(Style.STROKE);
     }

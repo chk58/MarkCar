@@ -2,7 +2,13 @@
 <!-- width, height, x, y should in dp -->
 <map id="01" name="XXX-B1" width="8000" height="8000">
     <wall-group>
-        <wall points="100,100 7900,100 7900,4000 4000,4000 4000,7900 100,7900 100,100" degree="0" />
+        <wall points="100 100 7900 100"/>
+        <wall points="7900 100 7900 4000" />
+        <wall points="7900 4000 4000 4000" />
+        <wall points="4000 4000 4000 7900" degree="0" />
+        <wall points="4000 7900 100 7900" />
+        <wall points="100 7900 100 100" />
+        <wall points="4000 100 4000 3800" />
     </wall-group>
     <park-group>
         <park id="A001" name="A001" x="100" y="100" degree="0" />
@@ -28,5 +34,16 @@
         <park id="A020" name="A020" x="1700" y="600" />
         <park id="A021" name="A021" x="1900" y="600" />
         <park id="A022" name="A022" x="2100" y="600" />
+
+        <park id="A023" name="A023" x="4000" y="100" />
+        <park id="A024" name="A024" x="4200" y="100" />
+        <park id="A025" name="A025" x="4400" y="100" />
+        <park id="A026" name="A026" x="4600" y="100" />
+        <park id="A027" name="A027" x="4800" y="100" />
+        <park id="A028" name="A028" x="5000" y="100" />
+        <park id="A029" name="A029" x="5200" y="100" />
+        <park id="A030" name="A030" x="5400" y="100" />
+        <park id="A031" name="A031" x="5600" y="100" />
+        <park id="A032" name="A032" x="5800" y="100" />
     </park-group>
 </map>

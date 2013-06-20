@@ -27,6 +27,7 @@ import com.marker.markcar.map.item.Icons;
 import com.marker.markcar.map.item.Map;
 import com.marker.markcar.map.item.MapItem;
 import com.marker.markcar.map.item.ParkingSpace;
+import com.marker.markcar.map.item.Selectable;
 import com.marker.markcar.map.parse.XMLMapParser;
 
 public class MapView extends SurfaceView implements SurfaceHolder.Callback, GestureListener {
@@ -42,6 +43,7 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
     private final static int THREAD_WHAT_INIT_MAP = 0;
     private final static int THREAD_WHAT_SCALE = 1;
     private final static int THREAD_WHAT_MOVE = 2;
+    private final static int THREAD_WHAT_CLICK = 3;
 
     private SurfaceHolder mHolder;
     private HandlerThread mDrawThread;
@@ -62,25 +64,31 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
 
         @Override
         public void handleMessage(Message msg) {
-            MapView map = mMap.get();
-            if (map == null) {
+            MapView view = mMap.get();
+            if (view == null) {
                 return;
             }
             float[] f;
             switch (msg.what) {
                 case THREAD_WHAT_INIT_MAP:
-                    map.doInitMap();
+                    view.doInitMap();
                     break;
                 case THREAD_WHAT_SCALE:
                     f = (float[]) msg.obj;
                     if (f != null) {
-                        map.doScale(f[0], f[1], f[2]);
+                        view.doScale(f[0], f[1], f[2]);
                     }
                     break;
                 case THREAD_WHAT_MOVE:
                     f = (float[]) msg.obj;
                     if (f != null) {
-                        map.doMove(f[0], f[1]);
+                        view.doMove(f[0], f[1]);
+                    }
+                    break;
+                case THREAD_WHAT_CLICK:
+                    f = (float[]) msg.obj;
+                    if (f != null) {
+                        view.doClick(f[0], f[1]);
                     }
                     break;
                 default:
@@ -157,10 +165,45 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
         }
         mMatrix.reset();
         mMatrix.setScale(INIT_SCALE, INIT_SCALE);
+
         Canvas canvas = mHolder.lockCanvas();
-        canvas.setMatrix(mMatrix);
         drawMap(canvas);
         mHolder.unlockCanvasAndPost(canvas);
+    }
+
+    private void doClick(float x, float y) {
+        if (Thread.currentThread() != mDrawThread) {
+            throw new RuntimeException("Wrong thread when draw SurfaceView!");
+        }
+
+        boolean needRedraw = false;
+        boolean cancelSelect = false;
+        Selectable temp = null;
+        for (Selectable item : mMap.getSelectableList()) {
+            if (item.contains(x, y)) {
+                if (item.isSelected()) {
+                    cancelSelect = true;
+                }
+                item.setSelected(!item.isSelected());
+                needRedraw = true;
+                temp = item;
+                break;
+            }
+        }
+        if (needRedraw) {
+            if (!cancelSelect) {
+                for (Selectable item : mMap.getSelectableList()) {
+                    if (item.isSelected() && item != temp) {
+                        item.setSelected(false);
+                        break;
+                    }
+                }
+            }
+
+            Canvas canvas = mHolder.lockCanvas();
+            drawMap(canvas);
+            mHolder.unlockCanvasAndPost(canvas);
+        }
     }
 
     private void doMove(float dx, float dy) {
@@ -190,10 +233,9 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
         } else if (dys + y < maxY) {
             dys = maxY - y;
         }
-
         mMatrix.preTranslate(dxs, dys);
+
         Canvas canvas = mHolder.lockCanvas();
-        canvas.setMatrix(mMatrix);
         drawMap(canvas);
         mHolder.unlockCanvasAndPost(canvas);
     }
@@ -215,16 +257,19 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
         mMatrix.postScale(s, s, scaleX, scaleY);
 
         Canvas canvas = mHolder.lockCanvas();
-        canvas.setMatrix(mMatrix);
         drawMap(canvas);
         mHolder.unlockCanvasAndPost(canvas);
     }
 
     private void drawMap(Canvas canvas) {
-        clearCanvas(canvas);
-        mMap.draw(canvas);
+        if (canvas != null) {
+            canvas.setMatrix(mMatrix);
+            clearCanvas(canvas);
+            mMap.draw(canvas);
+        }
     }
 
+    @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
     }
 
@@ -253,11 +298,23 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
         return super.onTouchEvent(event);
     }
 
+    private float[] mClickInfo;
     @Override
     public boolean onClick(MotionEvent e) {
         String s = "RawX:" + e.getRawX() + " RawY:" + e.getRawY() + " x:" + e.getX() + " x:" + e.getY();
         Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
-        return true;
+
+        if (mThreadHandler != null) {
+            if (mClickInfo == null) {
+                mClickInfo = new float[2];
+            }
+            mClickInfo[0] = e.getX();
+            mClickInfo[1] = e.getY();
+            mThreadHandler.obtainMessage(THREAD_WHAT_CLICK, mClickInfo).sendToTarget();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
