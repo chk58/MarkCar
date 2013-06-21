@@ -12,14 +12,11 @@ public abstract class MapItem {
     public abstract void draw(Canvas canvas);
 
     public boolean contains(float x, float y) {
-        boolean result = false;
-        float rx = mBounds.left;
-        float ry = mBounds.top;
-        float width = mBounds.right - mBounds.left;
-        float height = mBounds.bottom - mBounds.top;
-        if (mDegree == 0) {
-            result = ((rx <= x) && (x <= (rx + width)) && (ry <= y) && (y <= (ry + height)));
-        } else {
+        float ox = x;
+        float oy = y;
+        if (mDegree > 0) {
+            float rx = mBounds.centerX();
+            float ry = mBounds.centerY();
             double r = Math.sqrt((y - ry) * (y - ry) + (x - rx) * (x - rx));
             double degree1 = 0;
             if (y != ry) {
@@ -28,10 +25,17 @@ public abstract class MapItem {
             double radian = (degree1 + mDegree) * Math.PI / 180;
             double sin = Math.sin(radian);
             double cos = Math.cos(radian);
-            float ox = (float) (r * sin) + rx;
-            float oy = (float) (r * cos) + ry;
-            result = ((rx <= ox) && (ox <= (rx + width)) && (ry <= oy) && (oy <= (ry + height)));
+            ox = (float) (r * sin) + rx;
+            oy = (float) (r * cos) + ry;
         }
-        return result;
+        return ((mBounds.left <= ox) && (ox <= mBounds.right) && (mBounds.top <= oy) && (oy <= mBounds.bottom));
+    }
+
+    public float getCenterX() {
+        return mBounds.centerX();
+    }
+
+    public float getCenterY() {
+        return mBounds.centerY();
     }
 }

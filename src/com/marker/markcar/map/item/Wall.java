@@ -21,7 +21,7 @@ public class Wall extends MapItem {
     @Override
     public void draw(Canvas canvas) {
         canvas.save();
-        canvas.rotate(mDegree, mBounds.left, mBounds.top);
+        canvas.rotate(mDegree, mBounds.centerX(), mBounds.centerY());
         canvas.drawLine(mBounds.left, mBounds.top, mBounds.right, mBounds.bottom, mPaint);
         canvas.restore();
     }

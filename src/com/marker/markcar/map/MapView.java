@@ -32,7 +32,7 @@ import com.marker.markcar.map.parse.XMLMapParser;
 
 public class MapView extends SurfaceView implements SurfaceHolder.Callback, GestureListener {
 
-    private final static String LOG_TAG = "MapView";
+    public final static String LOG_TAG = "MapView";
     private final static String THREAD_NAME = "DrawThread";
     private final static int BACKGROUND_COLOR = 0xFFFFFFFF;
     private final static float MAX_SCALE = 1.0f;

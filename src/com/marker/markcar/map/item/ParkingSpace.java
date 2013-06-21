@@ -13,6 +13,8 @@ public class ParkingSpace extends MapItem implements Crossable, Selectable {
     public static final float NAME_HEIGHT = 50;
     public static final int NAME_SIZE = 48;
 
+    private static final int F_RATE = 20;
+
     private static Bitmap sIcon;
     private final RectF mIconBounds;
 
@@ -53,7 +55,7 @@ public class ParkingSpace extends MapItem implements Crossable, Selectable {
     @Override
     public void draw(Canvas canvas) {
         canvas.save();
-        canvas.rotate(mDegree, mBounds.left, mBounds.top);
+        canvas.rotate(mDegree, mBounds.centerX(), mBounds.centerY());
 
         if (mIsSelected) {
             canvas.drawRect(mBounds.left + 1, mBounds.top + 1, mBounds.right - 1, mBounds.bottom - 1, mSelectPaint);
@@ -73,5 +75,10 @@ public class ParkingSpace extends MapItem implements Crossable, Selectable {
     @Override
     public void setSelected(boolean selected) {
         mIsSelected = selected;
+    }
+
+    @Override
+    public float getCostRate() {
+        return F_RATE;
     }
 }
