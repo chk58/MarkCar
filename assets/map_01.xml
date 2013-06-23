@@ -4,11 +4,16 @@
     <wall-group>
         <wall points="100 100 7900 100"/>
         <wall points="7900 100 7900 4000" />
-        <wall points="7900 4000 4000 4000" />
+        <wall points="4000 4000 7900 4000" />
         <wall points="4000 4000 4000 7900" degree="0" />
         <wall points="4000 7900 100 7900" />
         <wall points="100 7900 100 100" />
         <wall points="4000 100 4000 3800" />
+        
+        <!--
+        <wall points="1000 1500 4000 1500" />
+        <wall points="100 2700 3000 2700" />
+        <wall points="1000 3500 4000 3500" />-->
     </wall-group>
     <park-group>
         <park id="A001" name="A001" x="100" y="100" degree="0" />
@@ -47,6 +52,6 @@
         <park id="A032" name="A032" x="5800" y="100" />
 
         <park id="A033" name="A033" x="2000" y="2000" degree="30" />
-        <park id="A034" name="A034" x="2500" y="2500" degree="60" />
+        <park id="A034" name="A034" x="2500" y="2000" degree="60" />
     </park-group>
 </map>

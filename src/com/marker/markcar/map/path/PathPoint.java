@@ -13,6 +13,35 @@ public class PathPoint implements Comparable<PathPoint> {
         this.H = h;
     }
 
+    public float[][] getNearXYs() {
+        float[][] result = new float[8][2];
+        // float x = x - u;
+        // float y = y - u;
+        //
+        // x = x;
+        // y = y - u;
+        //
+        // // x = x + u;
+        // // y = y - u;
+        //
+        // x = x - u;
+        // y = y;
+        //
+        // x = x + u;
+        // y = y;
+        //
+        // // x = x - u;
+        // // y = y + u;
+        //
+        // x = x;
+        // y = y + u;
+        //
+        // // x = x + u;
+        // // y = y + u;
+        //
+        return result;
+    }
+
     public PathPoint getFather() {
         return mFather;
     }

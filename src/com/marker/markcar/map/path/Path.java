@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.marker.markcar.map.item.Crossable;
 import com.marker.markcar.map.item.MapItem;
 
 public class Path {
-    private static float COST_RATE_STRAIGHT = 10;
-    private static float COST_RATE_OBLIQUE = 14;
+    private static float COST_RATE_STRAIGHT = 1;
+    private static float COST_RATE_OBLIQUE = 1.4f;
+
+    private static float MOVE_UNIT = 100;
 
     private MapItem mStartItem;
     private MapItem mEndItem;
@@ -43,15 +46,18 @@ public class Path {
         mCloseList.add(mStartPoint);
         mCloseList.add(mEndPoint);
         mCurrentPoint = mStartPoint;
-        int max = 0;
+        int count = 0;
         while (!mComplete) {
-            max++;
+            count++;
             addOpenPoints();
             closeNextPoint();
             if (mEndItem.contains(mCurrentPoint.x, mCurrentPoint.y)) {
                 mComplete = true;
             }
         }
+        Log.d("chk", "count : " + count);
+        Log.d("chk", "mOpenList : " + mOpenList.size());
+        Log.d("chk", "mCloseList : " + mCloseList.size());
     }
 
     public boolean isComplete() {
@@ -90,39 +96,38 @@ public class Path {
         }
     }
 
-    float u = 100;
     private void addOpenPoints() {
-        float x = mCurrentPoint.x - u;
-        float y = mCurrentPoint.y - u;
-        addOpenPoint(x, y);
+        float x = mCurrentPoint.x - MOVE_UNIT;
+        float y = mCurrentPoint.y - MOVE_UNIT;
+        // addOpenPoint(x, y);
 
         x = mCurrentPoint.x;
-        y = mCurrentPoint.y - u;
+        y = mCurrentPoint.y - MOVE_UNIT;
         addOpenPoint(x, y);
 
-        x = mCurrentPoint.x + u;
-        y = mCurrentPoint.y - u;
-        addOpenPoint(x, y);
+        // x = mCurrentPoint.x + u;
+        // y = mCurrentPoint.y - u;
+        // addOpenPoint(x, y);
 
-        x = mCurrentPoint.x - u;
+        x = mCurrentPoint.x - MOVE_UNIT;
         y = mCurrentPoint.y;
         addOpenPoint(x, y);
 
-        x = mCurrentPoint.x + u;
+        x = mCurrentPoint.x + MOVE_UNIT;
         y = mCurrentPoint.y;
         addOpenPoint(x, y);
 
-        x = mCurrentPoint.x - u;
-        y = mCurrentPoint.y + u;
-        addOpenPoint(x, y);
+        // x = mCurrentPoint.x - u;
+        // y = mCurrentPoint.y + u;
+        // addOpenPoint(x, y);
 
         x = mCurrentPoint.x;
-        y = mCurrentPoint.y + u;
+        y = mCurrentPoint.y + MOVE_UNIT;
         addOpenPoint(x, y);
 
-        x = mCurrentPoint.x + u;
-        y = mCurrentPoint.y + u;
-        addOpenPoint(x, y);
+        // x = mCurrentPoint.x + u;
+        // y = mCurrentPoint.y + u;
+        // addOpenPoint(x, y);
     }
 
     private PathPoint getPointByXY(float x, float y, ArrayList<PathPoint> list) {
@@ -142,7 +147,7 @@ public class Path {
             rate = COST_RATE_STRAIGHT;
         }
         rate += getAdditionRate(pp);
-        return father.getG() + rate;
+        return father.getG() + rate * MOVE_UNIT;
     }
 
     private float getAdditionRate(PathPoint pp) {
@@ -175,13 +180,17 @@ public class Path {
 
     public void drawPath(Canvas canvas) {
         PathPoint pp = mCurrentPoint;
-        Paint p = new Paint();
-        p.setColor(Color.RED);
+        Paint paint = new Paint();
+        paint.setColor(Color.GRAY);
+        for (PathPoint p : mCloseList) {
+            canvas.drawRect(p.x - MOVE_UNIT / 2, p.y - MOVE_UNIT / 2, p.x + MOVE_UNIT / 2, p.y + MOVE_UNIT / 2, paint);
+        }
+        paint.setColor(Color.RED);
         while (pp.getFather() != null) {
-            canvas.drawLine(pp.x, pp.y, pp.getFather().x, pp.getFather().y, p);
+            canvas.drawLine(pp.x, pp.y, pp.getFather().x, pp.getFather().y, paint);
             pp = pp.getFather();
             result.add(pp);
         }
-        int i = 0;
+        // int i = 0;
     }
 }

@@ -13,7 +13,7 @@ public class ParkingSpace extends MapItem implements Crossable, Selectable {
     public static final float NAME_HEIGHT = 50;
     public static final int NAME_SIZE = 48;
 
-    private static final int F_RATE = 20;
+    private static final int F_RATE = 1;
 
     private static Bitmap sIcon;
     private final RectF mIconBounds;
