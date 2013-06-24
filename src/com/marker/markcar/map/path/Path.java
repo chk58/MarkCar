@@ -14,7 +14,7 @@ public class Path {
     private static float COST_RATE_STRAIGHT = 1;
     private static float COST_RATE_OBLIQUE = 1.4f;
 
-    private static float MOVE_UNIT = 100;
+    private static float MOVE_UNIT = 99f;
 
     private MapItem mStartItem;
     private MapItem mEndItem;
@@ -50,7 +50,9 @@ public class Path {
         while (!mComplete) {
             count++;
             addOpenPoints();
-            closeNextPoint();
+            if (!closeNextPoint()) {
+                break;
+            }
             if (mEndItem.contains(mCurrentPoint.x, mCurrentPoint.y)) {
                 mComplete = true;
             }
@@ -64,7 +66,10 @@ public class Path {
         return mComplete;
     }
 
-    private void closeNextPoint() {
+    private boolean closeNextPoint() {
+        if (mOpenList.size() == 0) {
+            return false;
+        }
         PathPoint pp = mOpenList.get(mOpenList.size() - 1);
         for (int i = mOpenList.size() - 2; i >= 0; i--) {
             PathPoint ppi = mOpenList.get(i);
@@ -75,6 +80,7 @@ public class Path {
         mCurrentPoint = pp;
         mOpenList.remove(pp);
         mCloseList.add(pp);
+        return true;
     }
 
     private void addOpenPoint(float x, float y) {
@@ -162,8 +168,9 @@ public class Path {
     private boolean crossAble(float x, float y) {
         boolean result = true;
         for (MapItem item : mItemList) {
-            if (!(item instanceof Crossable) && item.contains(x, y)) {
-                result = false; 
+            if (!(item instanceof Crossable)) {
+                if (item.contains(x, y))
+                result = false;
             }
         }
         return result;
@@ -182,9 +189,9 @@ public class Path {
         PathPoint pp = mCurrentPoint;
         Paint paint = new Paint();
         paint.setColor(Color.GRAY);
-        for (PathPoint p : mCloseList) {
-            canvas.drawRect(p.x - MOVE_UNIT / 2, p.y - MOVE_UNIT / 2, p.x + MOVE_UNIT / 2, p.y + MOVE_UNIT / 2, paint);
-        }
+//        for (PathPoint p : mCloseList) {
+//            canvas.drawRect(p.x - MOVE_UNIT / 2, p.y - MOVE_UNIT / 2, p.x + MOVE_UNIT / 2, p.y + MOVE_UNIT / 2, paint);
+//        }
         paint.setColor(Color.RED);
         while (pp.getFather() != null) {
             canvas.drawLine(pp.x, pp.y, pp.getFather().x, pp.getFather().y, paint);

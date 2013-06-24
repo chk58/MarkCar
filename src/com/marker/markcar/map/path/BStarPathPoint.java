@@ -1,10 +1,11 @@
 package com.marker.markcar.map.path;
 
+
 public class BStarPathPoint implements Comparable<BStarPathPoint> {
     private static float MOVE_UNIT = 100;
     private BStarPathPoint mFather;
+    private BStarPathPoint mDestination;
     private int mBranchOrientation;
-
     final float x;
     final float y;
 
@@ -98,5 +99,13 @@ public class BStarPathPoint implements Comparable<BStarPathPoint> {
         // }
         return 0;
     }
+
+//    public Obstacle getObstacle() {
+//        return mObstacle;
+//    }
+//
+//    public void setObstacle(Obstacle mObstacle) {
+//        this.mObstacle = mObstacle;
+//    }
 
 }

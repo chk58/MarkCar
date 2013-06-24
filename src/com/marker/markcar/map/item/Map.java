@@ -9,19 +9,19 @@ import com.marker.markcar.map.path.Path;
 public class Map {
 
     private final ArrayList<MapItem> mItemList;
-    private final ArrayList<Selectable> mSelectableList;
+    private final ArrayList<SelectableItem> mSelectableList;
 
     private final float mWidth;
     private final float mHeight;
     private Path mPath;
-    public Map(ArrayList<MapItem> itemList, ArrayList<Selectable> selectableList, float width, float height) {
+    public Map(ArrayList<MapItem> itemList, ArrayList<SelectableItem> selectableList, float width, float height) {
         mItemList = itemList;
         mSelectableList = selectableList;
         mWidth = width;
         mHeight = height;
-        mPath = new Path((MapItem) mSelectableList.get(0), (MapItem) mSelectableList.get(30), mItemList);
-        ((Selectable) mSelectableList.get(0)).setSelected(true);
-        ((Selectable) mSelectableList.get(30)).setSelected(true);
+        mPath = new Path(mSelectableList.get(0), mSelectableList.get(30), mItemList);
+        mSelectableList.get(0).setSelected(true);
+        mSelectableList.get(30).setSelected(true);
         mPath.computePath();
     }
 
@@ -42,7 +42,7 @@ public class Map {
         }
     }
 
-    public ArrayList<Selectable> getSelectableList() {
+    public ArrayList<SelectableItem> getSelectableList() {
         return mSelectableList;
     }
 }

@@ -10,11 +10,13 @@ public class Icons {
 
     private static boolean sInit = false;
     public static Bitmap sParkIcon;
+    public static Bitmap sElevatorIcon;
 
     public static void init(Context context) {
         if (!sInit) {
             sInit = true;
             sParkIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.packing_space);
+            sElevatorIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.elevator);
         }
     }
 

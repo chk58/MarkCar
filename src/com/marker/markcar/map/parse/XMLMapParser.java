@@ -13,10 +13,11 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import android.content.Context;
 
+import com.marker.markcar.map.item.Elevator;
 import com.marker.markcar.map.item.Map;
 import com.marker.markcar.map.item.MapItem;
 import com.marker.markcar.map.item.ParkingSpace;
-import com.marker.markcar.map.item.Selectable;
+import com.marker.markcar.map.item.SelectableItem;
 import com.marker.markcar.map.item.Wall;
 
 public class XMLMapParser implements MapParser {
@@ -27,6 +28,8 @@ public class XMLMapParser implements MapParser {
     private static final String ELEMENT_PARK = "park";
     private static final String ELEMENT_WALL_GROUP = "wall-group";
     private static final String ELEMENT_WALL = "wall";
+    private static final String ELEMENT_ELEVATOR_GROUP = "elevator-group";
+    private static final String ELEMENT_ELEVATOR = "elevator";
 
     private static final String ATTR_ID = "id";
     private static final String ATTR_NAME = "name";
@@ -65,7 +68,7 @@ public class XMLMapParser implements MapParser {
     private static class MapHandler extends DefaultHandler {
 
         private ArrayList<MapItem> mItemList = new ArrayList<MapItem>();
-        private ArrayList<Selectable> mSelectableList = new ArrayList<Selectable>();
+        private ArrayList<SelectableItem> mSelectableList = new ArrayList<SelectableItem>();
         private float mWidth = 0;
         private float mHeight = 0;
 
@@ -98,6 +101,17 @@ public class XMLMapParser implements MapParser {
                         Float.parseFloat(p[1]), Float.parseFloat(p[2]),
                         Float.parseFloat(p[3]), Integer.parseInt(degree));
                 mItemList.add(wall);
+            } else if (ELEMENT_ELEVATOR.equals(localName)) {
+                String degree = attributes.getValue(ATTR_DEGREE);
+                if (degree == null) {
+                    degree = "0";
+                }
+                Elevator elev = new Elevator(Float.parseFloat(attributes
+                        .getValue(ATTR_X)), Float.parseFloat(attributes
+                        .getValue(ATTR_Y)), Integer.parseInt(degree),
+                        attributes.getValue(ATTR_NAME));
+                mItemList.add(elev);
+                mSelectableList.add(elev);
             }
         }
 

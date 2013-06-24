@@ -7,13 +7,12 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
 
-public class ParkingSpace extends SelectableItem implements Crossable {
-    public static final float WIDTH = 200;
+public class Elevator extends SelectableItem {
+
+    public static final float WIDTH = 400;
     public static final float HEIGHT = 400;
     public static final float NAME_HEIGHT = 50;
     public static final int NAME_SIZE = 48;
-
-    private static final int F_RATE = 0;
 
     private static Bitmap sIcon;
     private final RectF mIconBounds;
@@ -22,8 +21,8 @@ public class ParkingSpace extends SelectableItem implements Crossable {
     private final float mNameX;
     private final float mNameY;
 
-    public ParkingSpace(float x, float y, int degree, String name) {
-        sIcon = Icons.sParkIcon;
+    public Elevator(float x, float y, int degree, String name) {
+        sIcon = Icons.sElevatorIcon;
 
         mName = name;
         mBounds = new RectF(x, y, x + WIDTH, y + HEIGHT);
@@ -49,8 +48,10 @@ public class ParkingSpace extends SelectableItem implements Crossable {
         mNameY = y + HEIGHT - NAME_HEIGHT;
     }
 
+
     @Override
     public void draw(Canvas canvas) {
+
         canvas.save();
         canvas.rotate(mDegree, mBounds.centerX(), mBounds.centerY());
 
@@ -64,8 +65,4 @@ public class ParkingSpace extends SelectableItem implements Crossable {
         canvas.restore();
     }
 
-    @Override
-    public float getCostRate() {
-        return F_RATE;
-    }
 }

@@ -22,7 +22,7 @@ public class BStarPath {
 //    private final ArrayList<BStarPathPoint> mOpenList = new ArrayList<BStarPathPoint>();
 //    private final ArrayList<BStarPathPoint> mCloseList = new ArrayList<BStarPathPoint>();
     private final ArrayList<ArrayList<BStarPathPoint>> mBranchList = new ArrayList<ArrayList<BStarPathPoint>>();
-    private final ArrayList<BStarPathPoint> mFreeList = new ArrayList<BStarPathPoint>();
+    //private final ArrayList<BStarPathPoint> mFreeList = new ArrayList<BStarPathPoint>();
     private boolean mComplete;
 
     public BStarPath(MapItem start, MapItem end, ArrayList<MapItem> itemList) {
@@ -47,7 +47,10 @@ public class BStarPath {
         // mCloseList.add(mStartPoint);
         // mCloseList.add(mEndPoint);
 
-        mFreeList.add(mStartPoint);
+        ArrayList<BStarPathPoint> startBranch = new ArrayList<BStarPathPoint>();
+        startBranch.add(mStartPoint);
+        mBranchList.add(startBranch);
+        //mFreeList.add(mStartPoint);
         // mBranchList.add(startBranch);
 
         // mCurrentPoint = mStartPoint;

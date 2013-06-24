@@ -27,7 +27,7 @@ import com.marker.markcar.map.item.Icons;
 import com.marker.markcar.map.item.Map;
 import com.marker.markcar.map.item.MapItem;
 import com.marker.markcar.map.item.ParkingSpace;
-import com.marker.markcar.map.item.Selectable;
+import com.marker.markcar.map.item.SelectableItem;
 import com.marker.markcar.map.parse.XMLMapParser;
 
 public class MapView extends SurfaceView implements SurfaceHolder.Callback, GestureListener {
@@ -178,12 +178,12 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
 
         boolean needRedraw = false;
         boolean cancelSelect = false;
-        Selectable temp = null;
+        SelectableItem temp = null;
         mMatrix.getValues(mMatrixValues);
         float sx = (x - mMatrixValues[Matrix.MTRANS_X]) / mMatrixValues[Matrix.MSCALE_X];
         float sy = (y - mMatrixValues[Matrix.MTRANS_Y]) / mMatrixValues[Matrix.MSCALE_Y];
 
-        for (Selectable item : mMap.getSelectableList()) {
+        for (SelectableItem item : mMap.getSelectableList()) {
             if (item.contains(sx, sy)) {
                 if (item.isSelected()) {
                     cancelSelect = true;
@@ -196,7 +196,7 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
         }
         if (needRedraw) {
             if (!cancelSelect) {
-                for (Selectable item : mMap.getSelectableList()) {
+                for (SelectableItem item : mMap.getSelectableList()) {
                     if (item.isSelected() && item != temp) {
                         item.setSelected(false);
                         break;

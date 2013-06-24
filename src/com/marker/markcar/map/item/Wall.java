@@ -19,10 +19,26 @@ public class Wall extends MapItem {
 
     public Wall(float x1, float y1, float x2, float y2, int degree) {
         if (x1 == x2) {
-            mBounds = new RectF(x1 - WIDTH, y1, x2 + WIDTH, y2);
+            float top, bottom;
+            if (y1 < y2) {
+                top = y1;
+                bottom = y2;
+            } else {
+                top = y2;
+                bottom = y1;
+            }
+            mBounds = new RectF(x1 - WIDTH / 2, top, x2 + WIDTH / 2, bottom);
             mIsVertical = true;
         } else if (y1 == y2) {
-            mBounds = new RectF(x1, y1, x2, y2 + WIDTH);
+            float left, right;
+            if (x1 < x2) {
+                left = x1;
+                right = x2;
+            } else {
+                left = x2;
+                right = x1;
+            }
+            mBounds = new RectF(left, y1 - WIDTH / 2, right, y2 + WIDTH / 2);
             mIsVertical = false;
         } else {
             throw new IllegalArgumentException();
