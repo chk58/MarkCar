@@ -1,15 +1,15 @@
 package com.marker.markcar.content;
 
-public class Mall {
-    private final int mId;
+public class MallInfo {
+    private final long mId;
     private final String mName;
 
-    public Mall(int id, String name) {
+    public MallInfo(long id, String name) {
         mId = id;
         mName = name;
     }
 
-    public int getId() {
+    public long getId() {
         return mId;
     }
 

@@ -22,7 +22,7 @@ public class Map {
         mPath = new Path(mSelectableList.get(0), mSelectableList.get(30), mItemList);
         mSelectableList.get(0).setSelected(true);
         mSelectableList.get(30).setSelected(true);
-        mPath.computePath();
+        // mPath.computePath();
     }
 
     public float getWidth() {

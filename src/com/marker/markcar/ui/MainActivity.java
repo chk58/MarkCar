@@ -20,14 +20,14 @@ public class MainActivity extends Activity {
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getFragmentManager(), R.id.realtabcontent);
 
-        mTabHost.addTab(mTabHost.newTabSpec(MallMapParkFragment.TAB_TAG).setIndicator("车位导航"), MallMapParkFragment.class,
+        mTabHost.addTab(mTabHost.newTabSpec(MallMapParkFragment.TAB_TAG).setIndicator("车位导航"),
+                MallMapParkFragment.class,
                 null);
 
         mTabHost.addTab(mTabHost.newTabSpec("warning").setIndicator("车位预警"), Fragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("activity").setIndicator("优惠活动"), Fragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("more").setIndicator("更多..."), Fragment.class, null);
     }
-
 
     @Override
     public void onBackPressed() {

@@ -141,9 +141,9 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
         mMainHandler = new MainHandler(this);
     }
 
-    public void showMap(Map map) {
+    public void setMap(Map map) {
         mMap = map;
-        if (mDrawThread != null && mDrawThread.isAlive() && mThreadHandler !=null) {
+        if (mDrawThread != null && mDrawThread.isAlive() && mThreadHandler != null) {
             mThreadHandler.sendEmptyMessage(THREAD_WHAT_INIT_MAP);
         }
     }
@@ -279,6 +279,10 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
         mDrawThread = new HandlerThread(THREAD_NAME);
         mDrawThread.start();
         mThreadHandler = new ThreadHandler(this, mDrawThread.getLooper());
+
+        if (mMap != null) {
+            mThreadHandler.sendEmptyMessage(THREAD_WHAT_INIT_MAP);
+        }
         //mThreadHandler.sendEmptyMessage(THREAD_WHAT_INIT_MAP);
     }
 

@@ -10,14 +10,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.marker.markcar.R;
-import com.marker.markcar.content.Mall;
+import com.marker.markcar.content.MallInfo;
 
 public class MallListAdapter extends BaseAdapter {
 
     private final LayoutInflater mInflater;
-    private final ArrayList<Mall> mList;
+    private final ArrayList<MallInfo> mList;
 
-    public MallListAdapter(Context context, ArrayList<Mall> list) {
+    public MallListAdapter(Context context, ArrayList<MallInfo> list) {
         mInflater = LayoutInflater.from(context);
         mList = list;
     }
@@ -39,7 +39,7 @@ public class MallListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Mall mall = mList.get(position);
+        MallInfo mall = mList.get(position);
         View v = convertView;
         if (v == null) {
             v = mInflater.inflate(R.layout.mall_list_item, null);
