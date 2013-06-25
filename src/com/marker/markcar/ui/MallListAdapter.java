@@ -42,7 +42,7 @@ public class MallListAdapter extends BaseAdapter {
         Mall mall = mList.get(position);
         View v = convertView;
         if (v == null) {
-            v = mInflater.inflate(R.layout.fragment_mall_list_item, null);
+            v = mInflater.inflate(R.layout.mall_list_item, null);
         }
         ((TextView) v.findViewById(R.id.mall_name)).setText(mall.getName());
         return v;

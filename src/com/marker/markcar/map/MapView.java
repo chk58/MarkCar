@@ -6,7 +6,6 @@
 package com.marker.markcar.map;
 
 import java.lang.ref.SoftReference;
-import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -25,10 +24,7 @@ import android.widget.Toast;
 import com.marker.markcar.map.GestureController.GestureListener;
 import com.marker.markcar.map.item.Icons;
 import com.marker.markcar.map.item.Map;
-import com.marker.markcar.map.item.MapItem;
-import com.marker.markcar.map.item.ParkingSpace;
 import com.marker.markcar.map.item.SelectableItem;
-import com.marker.markcar.map.parse.XMLMapParser;
 
 public class MapView extends SurfaceView implements SurfaceHolder.Callback, GestureListener {
 
@@ -143,12 +139,13 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
         mHolder.addCallback(this);
         mGestureController = new GestureController(getContext(), this);
         mMainHandler = new MainHandler(this);
+    }
 
-        ArrayList<MapItem> itemList = new ArrayList<MapItem>();
-        for (int i = 0; i < 20; i++) {
-            itemList.add(new ParkingSpace(100 + ParkingSpace.WIDTH * i, 100, 0, "A" + (i + 1)));
+    public void showMap(Map map) {
+        mMap = map;
+        if (mDrawThread != null && mDrawThread.isAlive() && mThreadHandler !=null) {
+            mThreadHandler.sendEmptyMessage(THREAD_WHAT_INIT_MAP);
         }
-        mMap = (new XMLMapParser(getContext(), "map_01.xml")).parse();
     }
 
     private void clearCanvas(Canvas canvas) {
@@ -282,7 +279,7 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
         mDrawThread = new HandlerThread(THREAD_NAME);
         mDrawThread.start();
         mThreadHandler = new ThreadHandler(this, mDrawThread.getLooper());
-        mThreadHandler.sendEmptyMessage(THREAD_WHAT_INIT_MAP);
+        //mThreadHandler.sendEmptyMessage(THREAD_WHAT_INIT_MAP);
     }
 
     @Override

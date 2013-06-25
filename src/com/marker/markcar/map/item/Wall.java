@@ -10,7 +10,7 @@ public class Wall extends MapItem {
     private static final Paint WALL_PAINT = new Paint();
     private static final float WIDTH = 100;
     static {
-        WALL_PAINT.setStrokeWidth(WIDTH);
+        WALL_PAINT.setStrokeWidth(10);
         WALL_PAINT.setColor(Color.BLACK);
         WALL_PAINT.setStyle(Style.STROKE);
     }
