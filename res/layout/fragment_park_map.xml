@@ -7,7 +7,7 @@
         android:id="@+id/park_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="you have not selected any parking space yet." />
+        android:textIsSelectable="false" />
     <GridView
         android:id="@+id/map_name_grid"
         android:layout_width="match_parent"
@@ -50,7 +50,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
-            android:stretchMode="spacingWidth"
-            android:numColumns="5" />
+            android:stretchMode="none"
+            
+            android:columnWidth="60dp"
+            android:numColumns="6" />
     </FrameLayout>
 </LinearLayout>

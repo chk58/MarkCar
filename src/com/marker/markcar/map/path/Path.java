@@ -16,8 +16,8 @@ public class Path {
 
     private static float MOVE_UNIT = 99f;
 
-    private MapItem mStartItem;
-    private MapItem mEndItem;
+    private final MapItem mStartItem;
+    private final MapItem mEndItem;
     private PathPoint mStartPoint;
     private PathPoint mEndPoint;
     private PathPoint mCurrentPoint;
@@ -28,14 +28,9 @@ public class Path {
 
     private final ArrayList<PathPoint> result = new ArrayList<PathPoint>();
     public Path(MapItem start, MapItem end, ArrayList<MapItem> itemList) {
-        reset(start, end);
-        mItemList = itemList;
-    }
-
-    public void reset(MapItem start, MapItem end) {
         mStartItem = start;
         mEndItem = end;
-        mComplete = false;
+        mItemList = itemList;
     }
 
     public void computePath() {
@@ -57,7 +52,6 @@ public class Path {
                 mComplete = true;
             }
         }
-        Log.d("chk", "count : " + count);
         Log.d("chk", "mOpenList : " + mOpenList.size());
         Log.d("chk", "mCloseList : " + mCloseList.size());
     }

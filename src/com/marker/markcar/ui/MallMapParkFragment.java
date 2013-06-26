@@ -23,6 +23,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
@@ -61,6 +62,8 @@ public class MallMapParkFragment extends ListFragment implements OnItemClickList
     private TextView mLoadInfo;
     private ParkMapFragment mParkMapFragment;
     private boolean mParkMapShown = false;
+    private long mSelectedMallId;
+    private MallListAdapter mAdapter;
 
     public static MallMapParkFragment newInstance() {
         MallMapParkFragment fragment = new MallMapParkFragment();
@@ -120,6 +123,14 @@ public class MallMapParkFragment extends ListFragment implements OnItemClickList
         mParkMapContainer = mRootView.findViewById(R.id.park_map_container);
         mParkMapContent = mRootView.findViewById(R.id.park_map_content);
         mLoadInfo = (TextView) mRootView.findViewById(R.id.load_info);
+
+        mRootView.findViewById(R.id.clear_query).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEditText.setText("");
+            }
+        });
+
         return mRootView;
     }
 
@@ -200,8 +211,8 @@ public class MallMapParkFragment extends ListFragment implements OnItemClickList
 
     private void showMallList(ArrayList<MallInfo> result) {
         if (isVisible()) {
-            MallListAdapter adapter = new MallListAdapter(getActivity(), result);
-            setListAdapter(adapter);
+            mAdapter = new MallListAdapter(getActivity(), result);
+            setListAdapter(mAdapter);
         }
     }
 
@@ -379,8 +390,10 @@ public class MallMapParkFragment extends ListFragment implements OnItemClickList
         mLoadInfo.setVisibility(View.GONE);
         mParkMapContent.setVisibility(View.VISIBLE);
 
-        mParkMapFragment = new ParkMapFragment();
+        mParkMapFragment = ParkMapFragment.newInstance();
+        mParkMapFragment.setMallInfo(mAdapter.getMallInfoById(mSelectedMallId));
         mParkMapFragment.setMapInfoList(data);
+
         FragmentTransaction ft = mFragmentManager.beginTransaction();
         ft.add(R.id.park_map_content, mParkMapFragment, ParkMapFragment.TAB_TAG);
         ft.commit();
@@ -388,6 +401,7 @@ public class MallMapParkFragment extends ListFragment implements OnItemClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        mSelectedMallId = id;
         if (mLoadMapListTask != null) {
             mLoadMapListTask.cancel(true);
         }

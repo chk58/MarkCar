@@ -22,6 +22,15 @@ public class MallListAdapter extends BaseAdapter {
         mList = list;
     }
 
+    public MallInfo getMallInfoById(long id) {
+        for (MallInfo mi : mList) {
+            if (mi.getId() == id) {
+                return mi;
+            }
+        }
+        return null;
+    }
+
     @Override
     public int getCount() {
         return mList.size();

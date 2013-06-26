@@ -13,6 +13,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import android.content.Context;
 
+import com.marker.markcar.map.item.DestinationItem;
 import com.marker.markcar.map.item.Elevator;
 import com.marker.markcar.map.item.Map;
 import com.marker.markcar.map.item.MapItem;
@@ -69,6 +70,8 @@ public class XMLMapParser implements MapParser {
 
         private ArrayList<MapItem> mItemList = new ArrayList<MapItem>();
         private ArrayList<SelectableItem> mSelectableList = new ArrayList<SelectableItem>();
+        private ArrayList<ParkingSpace> mParkList = new ArrayList<ParkingSpace>();
+        private ArrayList<DestinationItem> mDestinationList = new ArrayList<DestinationItem>();
         private float mWidth = 0;
         private float mHeight = 0;
 
@@ -89,6 +92,7 @@ public class XMLMapParser implements MapParser {
                         attributes.getValue(ATTR_NAME));
                 mItemList.add(park);
                 mSelectableList.add(park);
+                mParkList.add(park);
             } else if (ELEMENT_WALL.equals(localName)) {
                 String degree = attributes.getValue(ATTR_DEGREE);
                 if (degree == null) {
@@ -112,11 +116,12 @@ public class XMLMapParser implements MapParser {
                         attributes.getValue(ATTR_NAME));
                 mItemList.add(elev);
                 mSelectableList.add(elev);
+                mDestinationList.add(elev);
             }
         }
 
         public Map getMap() {
-            return new Map(mItemList, mSelectableList, mWidth, mHeight);
+            return new Map(mItemList, mSelectableList, mParkList, mDestinationList, mWidth, mHeight);
         }
     }
 }

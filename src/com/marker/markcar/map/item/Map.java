@@ -10,19 +10,40 @@ public class Map {
 
     private final ArrayList<MapItem> mItemList;
     private final ArrayList<SelectableItem> mSelectableList;
+    private final ArrayList<ParkingSpace> mParkList;
+    private final ArrayList<DestinationItem> mDestinationList;
 
     private final float mWidth;
     private final float mHeight;
     private Path mPath;
-    public Map(ArrayList<MapItem> itemList, ArrayList<SelectableItem> selectableList, float width, float height) {
+    public Map(ArrayList<MapItem> itemList, ArrayList<SelectableItem> selectableList,
+            ArrayList<ParkingSpace> parkList, ArrayList<DestinationItem> destinationList, float width, float height) {
         mItemList = itemList;
         mSelectableList = selectableList;
+        mParkList = parkList;
+        mDestinationList = destinationList;
         mWidth = width;
         mHeight = height;
-        mPath = new Path(mSelectableList.get(0), mSelectableList.get(30), mItemList);
+
+        mPath = new Path(mSelectableList.get(0), mSelectableList.get(35), mItemList);
         mSelectableList.get(0).setSelected(true);
-        mSelectableList.get(30).setSelected(true);
-        // mPath.computePath();
+        mSelectableList.get(35).setSelected(true);
+        mPath.computePath();
+    }
+
+    public void clearPath() {
+        mPath = null;
+    }
+
+    public void resetPath(MapItem start, MapItem end) {
+        mPath = new Path(start, end, mItemList);
+    }
+
+
+    public void computePath() {
+        if (mPath != null && !mPath.isComplete()) {
+            mPath.computePath();
+        }
     }
 
     public float getWidth() {
@@ -44,5 +65,13 @@ public class Map {
 
     public ArrayList<SelectableItem> getSelectableList() {
         return mSelectableList;
+    }
+
+    public ArrayList<ParkingSpace> getParkList() {
+        return mParkList;
+    }
+
+    public ArrayList<DestinationItem> getDestinationList() {
+        return mDestinationList;
     }
 }

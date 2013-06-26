@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
 
-public class Elevator extends SelectableItem {
+public class Elevator extends DestinationItem {
 
     public static final float WIDTH = 400;
     public static final float HEIGHT = 400;
@@ -17,7 +17,6 @@ public class Elevator extends SelectableItem {
     private static Bitmap sIcon;
     private final RectF mIconBounds;
 
-    private final String mName;
     private final float mNameX;
     private final float mNameY;
 
@@ -34,7 +33,7 @@ public class Elevator extends SelectableItem {
         mPaint.setStyle(Style.STROKE);
 
         mSelectPaint = new Paint();
-        mSelectPaint.setColor(Color.YELLOW);
+        mSelectPaint.setColor(Color.MAGENTA);
         mSelectPaint.setStyle(Style.FILL);
 
         float iconL = x + (WIDTH - sIcon.getWidth()) / 2;

@@ -19,6 +19,7 @@ public class ParkingSpace extends SelectableItem implements Crossable {
     private final RectF mIconBounds;
 
     private final String mName;
+
     private final float mNameX;
     private final float mNameY;
 
@@ -67,5 +68,9 @@ public class ParkingSpace extends SelectableItem implements Crossable {
     @Override
     public float getCostRate() {
         return F_RATE;
+    }
+
+    public String getName() {
+        return mName;
     }
 }
