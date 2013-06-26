@@ -25,6 +25,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.marker.markcar.R;
 import com.marker.markcar.content.MallInfo;
@@ -210,6 +211,14 @@ public class ParkMapFragment extends Fragment implements OnClickListener, OnItem
         mMapNameAdapter = new MapNameAdapter();
         mMapNameGridView.setAdapter(mMapNameAdapter);
         mParkInfo.setText("You are now in " + mMallInfo.getName());
+
+        String s = mSharedPrefs.getSelectedParkId();
+        if (s != null) {
+            String arr[] = s.split(SharedPrefs.SEPARATOR);
+            if (arr.length == 3) {
+
+            }
+        }
         showMap(0);
         Log.d("chk", "onActivityCreated");
     }
@@ -392,8 +401,6 @@ public class ParkMapFragment extends Fragment implements OnClickListener, OnItem
 
     private void onParkSelected(ParkingSpace ps) {
         mSharedPrefs.setSelectedParkId(mMallInfo.getId(), mCurrentMapId, ps.getName());
-        mMapView.refreshMap();
-        mParkListAdapter.notifyDataSetChanged();
         mParkInfo.setText("you selected " + mMallInfo.getName() + " "
                 + findMapInfoById(mCurrentMapId).getName() + " " + ps.getName());
 
@@ -413,10 +420,11 @@ public class ParkMapFragment extends Fragment implements OnClickListener, OnItem
                 mComputePathTask.execute();
             }
         }
+        mMapView.refreshMap();
+        mParkListAdapter.notifyDataSetChanged();
     }
 
     private void onDestinationSelected(DestinationItem di) {
-        mMapView.refreshMap();
         mMap.clearPath();
 
         if (mCurrentParkName == null) {
@@ -435,9 +443,10 @@ public class ParkMapFragment extends Fragment implements OnClickListener, OnItem
                 mComputePathTask.execute();
             }
         }
+        mMapView.refreshMap();
     }
 
-    private static class ComputePathTask extends AsyncTask<Void, Void, Void> {
+    private static class ComputePathTask extends AsyncTask<Void, Void, Boolean> {
 
         private ParkMapFragment mFragment;
 
@@ -450,14 +459,17 @@ public class ParkMapFragment extends Fragment implements OnClickListener, OnItem
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
-            mFragment.mMap.computePath();
-            return null;
+        protected Boolean doInBackground(Void... params) {
+            return mFragment.mMap.computePath();
         }
 
         @Override
-        protected void onPostExecute(Void result) {
-            mFragment.mMapView.refreshMap();
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                mFragment.mMapView.refreshMap();
+            } else {
+                Toast.makeText(mFragment.getActivity(), "Can not find the path...", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

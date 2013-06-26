@@ -15,6 +15,8 @@
         <wall points="0 2300 3000 2300" degree="20" />
         <wall points="1000 3500 4000 3500" />
         <wall points="4000 3500 7700 3500" />
+        
+        <wall points="-200 7200 1810 7200" degree="45"/>
     </wall-group>
     <park-group>
         <park id="A001" name="A001" x="200" y="200" degree="0" />
@@ -56,9 +58,10 @@
         <park id="A034" name="A034" x="2500" y="2000" degree="60" />
     </park-group>
     <elevator-group>
-        <elevator id="E01" name="E01" x="7400" y="1800" degree="0" />
-        <elevator id="E02" name="E02" x="7400" y="2200" />
-        <elevator id="E03" name="E03" x="3500" y="7000" />
-        <elevator id="E04" name="E04" x="3000" y="7400" />
+        <elevator id="E01" name="E01" x="7500" y="1800" degree="0" />
+        <elevator id="E02" name="E02" x="7500" y="2200" />
+        <elevator id="E03" name="E03" x="3600" y="7000" />
+        <elevator id="E04" name="E04" x="3000" y="7500" />
+        <elevator id="E05" name="E05" x="100" y="7500" />
     </elevator-group>
 </map>

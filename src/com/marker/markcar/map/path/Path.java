@@ -33,7 +33,8 @@ public class Path {
         mItemList = itemList;
     }
 
-    public void computePath() {
+    public boolean computePath() {
+        boolean result = false;
         mOpenList.clear();
         mCloseList.clear();
         mStartPoint = new PathPoint(mStartItem.getCenterX(), mStartItem.getCenterY(), 0);
@@ -42,7 +43,7 @@ public class Path {
         mCloseList.add(mEndPoint);
         mCurrentPoint = mStartPoint;
         int count = 0;
-        while (!mComplete) {
+        while (!mComplete && count < 50000) {
             count++;
             addOpenPoints();
             if (!closeNextPoint()) {
@@ -50,10 +51,12 @@ public class Path {
             }
             if (mEndItem.contains(mCurrentPoint.x, mCurrentPoint.y)) {
                 mComplete = true;
+                result = true;
             }
         }
         Log.d("chk", "mOpenList : " + mOpenList.size());
         Log.d("chk", "mCloseList : " + mCloseList.size());
+        return result;
     }
 
     public boolean isComplete() {
@@ -78,7 +81,7 @@ public class Path {
     }
 
     private void addOpenPoint(float x, float y) {
-        if (!existInList(x, y, mCloseList) && crossAble(x, y)) {
+        if (!existInList(x, y, mCloseList) && (crossAble(x, y) || mEndItem.contains(x, y))) {
             PathPoint pp = getPointByXY(x, y, mOpenList);
             if (pp != null) {
                 float newG = computG(pp, mCurrentPoint);

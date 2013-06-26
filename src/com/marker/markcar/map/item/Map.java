@@ -25,10 +25,10 @@ public class Map {
         mWidth = width;
         mHeight = height;
 
-        mPath = new Path(mSelectableList.get(0), mSelectableList.get(35), mItemList);
-        mSelectableList.get(0).setSelected(true);
-        mSelectableList.get(35).setSelected(true);
-        mPath.computePath();
+//        mPath = new Path(mSelectableList.get(0), mSelectableList.get(35), mItemList);
+//        mSelectableList.get(0).setSelected(true);
+//        mSelectableList.get(35).setSelected(true);
+//        mPath.computePath();
     }
 
     public void clearPath() {
@@ -40,10 +40,11 @@ public class Map {
     }
 
 
-    public void computePath() {
+    public boolean computePath() {
         if (mPath != null && !mPath.isComplete()) {
-            mPath.computePath();
+            return mPath.computePath();
         }
+        return false;
     }
 
     public float getWidth() {
