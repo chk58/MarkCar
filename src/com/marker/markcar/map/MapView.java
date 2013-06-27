@@ -262,6 +262,8 @@ public class MapView extends SurfaceView implements SurfaceHolder.Callback, Gest
         if (s * mMatrixValues[Matrix.MSCALE_X] >= MAX_SCALE) {
             s = MAX_SCALE / mMatrixValues[Matrix.MSCALE_X];
             mMainHandler.obtainMessage(MAIN_WHAT_MAX_SCALE).sendToTarget();
+        } else if (s * mMatrixValues[Matrix.MSCALE_X] <= INIT_SCALE) {
+            s = INIT_SCALE / mMatrixValues[Matrix.MSCALE_X];
         }
         mMatrix.postScale(s, s, scaleX, scaleY);
 

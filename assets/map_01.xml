@@ -9,59 +9,222 @@
         <wall points="100 7900 4000 7900" />
         <wall points="100 7900 100 100" />
         <wall points="4000 100 4000 3800" />
-        
-        
+
         <wall points="1000 1500 4000 1500" degree="0" />
-        <wall points="0 2300 3000 2300" degree="20" />
-        <wall points="1000 3500 4000 3500" />
+        <wall points="100 2700 3800 2700" degree="0" />
         <wall points="4000 3500 7700 3500" />
-        
+
         <wall points="-200 7200 1810 7200" degree="45"/>
     </wall-group>
     <park-group>
-        <park id="A001" name="A001" x="200" y="200" degree="0" />
-        <park id="A002" name="A002" x="400" y="200" />
-        <park id="A003" name="A003" x="600" y="200" />
-        <park id="A004" name="A004" x="800" y="200" />
-        <park id="A005" name="A005" x="1000" y="200" />
-        <park id="A006" name="A006" x="1200" y="200" />
-        <park id="A007" name="A007" x="1400" y="200" />
-        <park id="A008" name="A008" x="1600" y="200" />
-        <park id="A009" name="A009" x="1800" y="200" />
-        <park id="A010" name="A010" x="2000" y="200" />
-        <park id="A011" name="A011" x="2200" y="200" />
+        <park name="A001" x="200" y="200" degree="0" />
+        <park name="A002" x="400" y="200" />
+        <park name="A003" x="600" y="200" />
+        <park name="A004" x="800" y="200" />
+        <park name="A005" x="1000" y="200" />
+        <park name="A006" x="1200" y="200" />
+        <park name="A007" x="1400" y="200" />
+        <park name="A008" x="1600" y="200" />
+        <park name="A009" x="1800" y="200" />
+        <park name="A010" x="2000" y="200" />
+        <park name="A011" x="2200" y="200" />
+        <park name="A012" x="2400" y="200" degree="0" />
+        <park name="A013" x="2600" y="200" />
+        <park name="A014" x="2800" y="200" />
+        <park name="A015" x="3000" y="200" />
+        <park name="A016" x="3200" y="200" />
+        <park name="A017" x="3400" y="200" />
+        <park name="A018" x="3600" y="200" />
 
-        <park id="A012" name="A012" x="200" y="700" />
-        <park id="A013" name="A013" x="400" y="700" />
-        <park id="A014" name="A014" x="600" y="700" />
-        <park id="A015" name="A015" x="800" y="700" />
-        <park id="A016" name="A016" x="1000" y="700" />
-        <park id="A017" name="A017" x="1200" y="700" degree="0" />
-        <park id="A018" name="A018" x="1400" y="700" />
-        <park id="A019" name="A019" x="1600" y="700" />
-        <park id="A020" name="A020" x="1800" y="700" />
-        <park id="A021" name="A021" x="2000" y="700" />
-        <park id="A022" name="A022" x="2200" y="700" />
+        <park name="A019" x="200" y="800" />
+        <park name="A020" x="400" y="800" />
+        <park name="A021" x="600" y="800" />
+        <park name="A022" x="800" y="800" />
+        <park name="A023" x="1000" y="800" />
+        <park name="A024" x="1200" y="800" degree="0" />
+        <park name="A025" x="1400" y="800" />
+        <park name="A026" x="1600" y="800" />
+        <park name="A027" x="1800" y="800" />
+        <park name="A028" x="2000" y="800" />
+        <park name="A029" x="2200" y="800" />
+        <park name="A030" x="2400" y="800" />
+        <park name="A031" x="2600" y="800" />
+        <park name="A032" x="2800" y="800" />
+        <park name="A033" x="3000" y="800" />
+        <park name="A034" x="3200" y="800" />
+        <park name="A035" x="3400" y="800" />
+        <park name="A036" x="3600" y="800" />
 
-        <park id="A023" name="A023" x="4100" y="200" />
-        <park id="A024" name="A024" x="4300" y="200" />
-        <park id="A025" name="A025" x="4500" y="200" />
-        <park id="A026" name="A026" x="4700" y="200" />
-        <park id="A027" name="A027" x="4900" y="200" />
-        <park id="A028" name="A028" x="5100" y="200" />
-        <park id="A029" name="A029" x="5300" y="200" />
-        <park id="A030" name="A030" x="5500" y="200" />
-        <park id="A031" name="A031" x="5700" y="200" />
-        <park id="A032" name="A032" x="5900" y="200" />
+        <park name="A037" x="300" y="1500" degree="90" />
+        <park name="A038" x="300" y="1700" degree="90" />
+        <park name="A039" x="300" y="1900" degree="90" />
+        <park name="A040" x="300" y="2100" degree="90" />
+        <park name="A055" x="300" y="2300" degree="90" />
 
-        <park id="A033" name="A033" x="2000" y="2000" degree="30" />
-        <park id="A034" name="A034" x="2500" y="2000" degree="60" />
+        <park name="A041" x="1000" y="1600" />
+        <park name="A042" x="1200" y="1600" />
+        <park name="A043" x="1400" y="1600" />
+        <park name="A044" x="1600" y="1600" />
+        <park name="A045" x="1800" y="1600" />
+        <park name="A046" x="2000" y="1600" />
+        <park name="A047" x="2200" y="1600" />
+        <park name="A048" x="2400" y="1600" />
+        <park name="A049" x="2600" y="1600" />
+        <park name="A050" x="2800" y="1600" />
+        <park name="A051" x="3000" y="1600" />
+        <park name="A052" x="3200" y="1600" />
+        <park name="A053" x="3400" y="1600" />
+        <park name="A054" x="3600" y="1600" />
+
+        <park name="A056" x="1000" y="2200" />
+        <park name="A057" x="1200" y="2200" />
+        <park name="A058" x="1400" y="2200" />
+        <park name="A059" x="1600" y="2200" />
+        <park name="A060" x="1800" y="2200" />
+        <park name="A061" x="2000" y="2200" />
+        <park name="A062" x="2200" y="2200" />
+        <park name="A063" x="2400" y="2200" />
+        <park name="A064" x="2600" y="2200" />
+        <park name="A065" x="2800" y="2200" />
+        <park name="A066" x="3000" y="2200" />
+        <park name="A067" x="3200" y="2200" />
+        <park name="A068" x="3400" y="2200" />
+        <park name="A069" x="3600" y="2200" />
+
+        <park name="A070" x="200" y="2800" degree="0" />
+        <park name="A071" x="400" y="2800" />
+        <park name="A072" x="600" y="2800" />
+        <park name="A073" x="800" y="2800" />
+        <park name="A074" x="1000" y="2800" />
+        <park name="A075" x="1200" y="2800" />
+        <park name="A076" x="1400" y="2800" />
+        <park name="A077" x="1600" y="2800" />
+        <park name="A078" x="1800" y="2800" />
+        <park name="A079" x="2000" y="2800" />
+        <park name="A080" x="2200" y="2800" />
+        <park name="A081" x="2400" y="2800" degree="0" />
+        <park name="A082" x="2600" y="2800" />
+        <park name="A083" x="2800" y="2800" />
+        <park name="A084" x="3000" y="2800" />
+        <park name="A085" x="3200" y="2800" />
+        <park name="A086" x="3400" y="2800" />
+        <park name="A087" x="3600" y="2800" />
+
+        <park name="A088" x="200"  y="3400" />
+        <park name="A089" x="400" y="3400" />
+        <park name="A090" x="600" y="3400" />
+        <park name="A091" x="800" y="3400" />
+        <park name="A092" x="1000" y="3400" />
+        <park name="A093" x="1200" y="3400" />
+        <park name="A094" x="1400" y="3400" degree="0" />
+        <park name="A095" x="1600" y="3400" />
+        <park name="A096" x="1800" y="3400" />
+        <park name="A097" x="2000" y="3400" />
+        <park name="A098" x="2200" y="3400" />
+        <park name="A099" x="2400" y="3400" />
+        <park name="A100" x="2600" y="3400" />
+        <park name="A101" x="2800" y="3400" />
+        <park name="A102" x="3000" y="3400" />
+        <park name="A103" x="3200" y="3400" />
+        <park name="A104" x="3400" y="3400" />
+        <park name="A105" x="3600" y="3400" />
+
+        <park name="A106" x="200"  y="4000" />
+        <park name="A107" x="400" y="4000" />
+        <park name="A108" x="600" y="4000" />
+        <park name="A109" x="800" y="4000" />
+        <park name="A110" x="1000" y="4000" />
+        <park name="A111" x="1200" y="4000" />
+        <park name="A112" x="1400" y="4000" degree="0" />
+        <park name="A113" x="1600" y="4000" />
+        <park name="A114" x="1800" y="4000" />
+        <park name="A115" x="2000" y="4000" />
+        <park name="A116" x="2200" y="4000" />
+        <park name="A117" x="2400" y="4000" />
+        <park name="A118" x="2600" y="4000" />
+        <park name="A119" x="2800" y="4000" />
+        <park name="A120" x="3000" y="4000" />
+        <park name="A121" x="3200" y="4000" />
+        <park name="A122" x="3400" y="4000" />
+        <park name="A123" x="3600" y="4000" />
+
+        <park name="A124" x="200"  y="4600" />
+        <park name="A125" x="400" y="4600" />
+        <park name="A126" x="600" y="4600" />
+        <park name="A127" x="800" y="4600" />
+        <park name="A128" x="1000" y="4600" />
+        <park name="A129" x="1200" y="4600" />
+        <park name="A130" x="1400" y="4600" degree="0" />
+        <park name="A131" x="1600" y="4600" />
+        <park name="A132" x="1800" y="4600" />
+        <park name="A133" x="2000" y="4600" />
+        <park name="A134" x="2200" y="4600" />
+        <park name="A135" x="2400" y="4600" />
+        <park name="A136" x="2600" y="4600" />
+        <park name="A137" x="2800" y="4600" />
+        <park name="A138" x="3000" y="4600" />
+        <park name="A139" x="3200" y="4600" />
+        <park name="A140" x="3400" y="4600" />
+        <park name="A141" x="3600" y="4600" />
+
+        <park name="A142" x="200"  y="5200" />
+        <park name="A143" x="400" y="5200" />
+        <park name="A144" x="600" y="5200" />
+        <park name="A145" x="800" y="5200" />
+        <park name="A146" x="1000" y="5200" />
+        <park name="A147" x="1200" y="5200" />
+        <park name="A148" x="1400" y="5200" degree="0" />
+        <park name="A149" x="1600" y="5200" />
+        <park name="A150" x="1800" y="5200" />
+        <park name="A151" x="2000" y="5200" />
+        <park name="A152" x="2200" y="5200" />
+        <park name="A153" x="2400" y="5200" />
+        <park name="A154" x="2600" y="5200" />
+        <park name="A155" x="2800" y="5200" />
+        <park name="A156" x="3000" y="5200" />
+        <park name="A157" x="3200" y="5200" />
+        <park name="A158" x="3400" y="5200" />
+        <park name="A159" x="3600" y="5200" />
+
+        <park name="A160" x="200"  y="5800" />
+        <park name="A161" x="400" y="5800" />
+        <park name="A162" x="600" y="5800" />
+        <park name="A163" x="800" y="5800" />
+        <park name="A164" x="1000" y="5800" />
+        <park name="A165" x="1200" y="5800" />
+        <park name="A166" x="1400" y="5800" degree="0" />
+        <park name="A167" x="1600" y="5800" />
+        <park name="A168" x="1800" y="5800" />
+        <park name="A169" x="2000" y="5800" />
+        <park name="A170" x="2200" y="5800" />
+        <park name="A171" x="2400" y="5800" />
+        <park name="A172" x="2600" y="5800" />
+        <park name="A173" x="2800" y="5800" />
+        <park name="A174" x="3000" y="5800" />
+        <park name="A175" x="3200" y="5800" />
+        <park name="A176" x="3400" y="5800" />
+        <park name="A177" x="3600" y="5800" />
+
+        <park name="A178" x="400" y="6300" degree="45" />
+        <park name="A179" x="542" y="6442" degree="45" />
+        <park name="A180" x="684" y="6584" degree="45" />
+        <park name="A181" x="826" y="6726" degree="45" />
+        <park name="A182" x="968" y="6868" degree="45" />
+        <park name="A183" x="1110" y="7010" degree="45" />
+        <park name="A184" x="1252" y="7152" degree="45" />
+        <park name="A185" x="1394" y="7294" degree="45" />
+        <park name="A186" x="1536" y="7436" degree="45" />
+
+        <park name="A187" x="2000" y="7400" />
+        <park name="A188" x="2200" y="7400" />
+        <park name="A189" x="2400" y="7400" />
+        <park name="A190" x="2600" y="7400" />
     </park-group>
     <elevator-group>
-        <elevator id="E01" name="E01" x="7500" y="1800" degree="0" />
-        <elevator id="E02" name="E02" x="7500" y="2200" />
-        <elevator id="E03" name="E03" x="3600" y="7000" />
-        <elevator id="E04" name="E04" x="3000" y="7500" />
-        <elevator id="E05" name="E05" x="100" y="7500" />
+        <elevator name="E01" x="7500" y="1800" degree="0" />
+        <elevator name="E02" x="7500" y="2200" />
+        <elevator name="E03" x="3600" y="7000" />
+        <elevator name="E04" x="3000" y="7500" />
+        <elevator name="E05" x="100" y="7500" />
     </elevator-group>
 </map>

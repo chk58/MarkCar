@@ -26,7 +26,6 @@ public class Path {
     private final ArrayList<PathPoint> mCloseList = new ArrayList<PathPoint>();
     private boolean mComplete;
 
-    private final ArrayList<PathPoint> result = new ArrayList<PathPoint>();
     public Path(MapItem start, MapItem end, ArrayList<MapItem> itemList) {
         mStartItem = start;
         mEndItem = end;
@@ -34,6 +33,7 @@ public class Path {
     }
 
     public boolean computePath() {
+        long startTime = System.currentTimeMillis();
         boolean result = false;
         mOpenList.clear();
         mCloseList.clear();
@@ -56,6 +56,9 @@ public class Path {
         }
         Log.d("chk", "mOpenList : " + mOpenList.size());
         Log.d("chk", "mCloseList : " + mCloseList.size());
+
+        long endTime = System.currentTimeMillis();
+        Log.d("chk", "used : " + (endTime - startTime) + " ms.");
         return result;
     }
 
@@ -185,7 +188,8 @@ public class Path {
     public void drawPath(Canvas canvas) {
         PathPoint pp = mCurrentPoint;
         Paint paint = new Paint();
-        paint.setColor(Color.GRAY);
+        paint.setStrokeWidth(10);
+//        paint.setColor(Color.GRAY);
 //        for (PathPoint p : mCloseList) {
 //            canvas.drawRect(p.x - MOVE_UNIT / 2, p.y - MOVE_UNIT / 2, p.x + MOVE_UNIT / 2, p.y + MOVE_UNIT / 2, paint);
 //        }
@@ -193,7 +197,6 @@ public class Path {
         while (pp.getFather() != null) {
             canvas.drawLine(pp.x, pp.y, pp.getFather().x, pp.getFather().y, paint);
             pp = pp.getFather();
-            result.add(pp);
         }
         // int i = 0;
     }
